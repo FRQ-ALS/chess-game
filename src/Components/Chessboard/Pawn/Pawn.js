@@ -13,8 +13,10 @@ export default function Pawn(props) {
   return (
     <div
       id="pawn"
-      onClick={() => console.log(coordinates)}
       className={props.className}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      onMouseMove={props.onMouseMove}
     ></div>
   );
 }
