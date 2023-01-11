@@ -8,13 +8,18 @@ export default function Chessboard() {
   const [mousePosition, setMousePosition] = useState(null);
   const [currentPosition, setCurrentPosition] = useState([-1, -1]);
   const [finalPosition, setFinalPosition] = useState(8,8);
-
+  const [highlightedCell, setHighlightedCell] = useState([-1,-1])
+  
   const handleMouseMove = (e, position) => {
     setMousePosition(position);
   };
   
 
   const handleMouseClick = (e, position) =>{
+    setHighlightedCell(position)
+
+    e.preventDefault()
+
     if(!mouseDown){
       setMouseDown(true)
       setCurrentPosition(position)
@@ -23,19 +28,20 @@ export default function Chessboard() {
 
     if(mouseDown){
       setFinalPosition(position)
-      // updatePiecePosition(currentPosition, position)
+      updatePiecePosition(currentPosition, position)
       setMouseDown(false)
     }
   }
 
-
-  // function updatePiecePosition(currentPosition, finalPosition) {
-  //   // const newGrid = grid.map((row) => [...row]);
-  //   // var temporary = newGrid[currentPosition[0], currentPosition[1]];
-  //   // newGrid[currentPosition[0], currentPosition[1]] = newGrid[finalPosition[0], finalPosition[1]];
-  //   // newGrid[finalPosition[0], finalPosition[1]] = temporary;
-  //   // setGrid(newGrid);
-  // }
+  function updatePiecePosition(currentPosition, finalPosition) {
+    console.log(currentPosition + " " + finalPosition)
+    const newGrid = grid.map((row) => [...row]);
+    var temporary = newGrid[currentPosition[0]][currentPosition[1]];
+    console.log(temporary)
+    newGrid[currentPosition[0]][currentPosition[1]] = newGrid[finalPosition[0]][finalPosition[1]];
+    newGrid[finalPosition[0]][finalPosition[1]] = temporary;
+    setGrid(newGrid);
+  }
 
   const pieceMap = new Map();
   pieceMap.set(0, null);
@@ -63,8 +69,8 @@ export default function Chessboard() {
 
   function highlightCell(position) {
     if (
-      position[1] === currentPosition[1] &&
-      position[0] === currentPosition[0]
+      position[1] === highlightedCell[1] &&
+      position[0] === highlightedCell[0]
     ) {
       return "true";
     }
