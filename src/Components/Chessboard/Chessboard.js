@@ -8,12 +8,11 @@ export default function Chessboard() {
   const [mousePosition, setMousePosition] = useState(null);
   const [currentPosition, setCurrentPosition] = useState([-1, -1]);
   const [finalPosition, setFinalPosition] = useState(8,8);
-         
 
   const handleMouseMove = (e, position) => {
-    console.log(position)
     setMousePosition(position);
   };
+  
 
   const handleMouseClick = (e, position) =>{
     if(!mouseDown){
@@ -29,27 +28,14 @@ export default function Chessboard() {
     }
   }
 
-  // const handleMouseDown = (e, position) => {
-  //   setCurrentPosition(position);
-  //   setMouseDown(true);
-  // };
 
-  // const handleMouseUp = (e, position) => {
-  //   setFinalPosition(position);
-  //   setMouseDown(false);
-  //   updatePiecePosition(currentPosition, position);
-  // };
-
-  function updatePiecePosition(currentPosition, finalPosition) {
-    const newGrid = grid.map((row) => [...row]);
-    // var temporary = newGrid[currentPosition[0], currentPosition[1]];
-    // newGrid[currentPosition[0], currentPosition[1]] = 0;
-    // newGrid[finalPosition[0], finalPosition[1]] = 1;
-
-    newGrid[6][0] = 0;
-    newGrid[3][0] = 1;
-    setGrid(newGrid);
-  }
+  // function updatePiecePosition(currentPosition, finalPosition) {
+  //   // const newGrid = grid.map((row) => [...row]);
+  //   // var temporary = newGrid[currentPosition[0], currentPosition[1]];
+  //   // newGrid[currentPosition[0], currentPosition[1]] = newGrid[finalPosition[0], finalPosition[1]];
+  //   // newGrid[finalPosition[0], finalPosition[1]] = temporary;
+  //   // setGrid(newGrid);
+  // }
 
   const pieceMap = new Map();
   pieceMap.set(0, null);
@@ -94,9 +80,7 @@ export default function Chessboard() {
               {row.map((cell, j) => (
                 <td
                   onMouseMove={(event) => handleMouseMove(event, [i, j])}
-                  // onMouseUp={(event) => handleMouseUp(event, mousePosition)}
-                  // onMouseDown={(event) => handleMouseDown(event, mousePosition)}
-                  onClick={handleMouseClick}
+                  onClick={event => handleMouseClick(event, mousePosition)}
                   highlighted={highlightCell([i, j])}
                   id="gridCell"
                   key={j}
