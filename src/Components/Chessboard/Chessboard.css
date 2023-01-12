@@ -12,7 +12,7 @@ td {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  background-color: pink;
+  background-color: grey;
 }
 
 .black {
@@ -29,7 +29,12 @@ td {
 }
 
 [highlighted~=true]{
-  outline: 3px solid white;
+  outline: 2px solid orange;
+}
+
+[possibleMove~=true]{
+  outline: 2px solid green;
+
 }
 
 #boardBody{

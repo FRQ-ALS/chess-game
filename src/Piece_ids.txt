@@ -1,1 +1,3 @@
 Pawn_id = 1;
+Rook_id = 2;
+
