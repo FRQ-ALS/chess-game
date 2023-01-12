@@ -5,7 +5,6 @@ import "./Pawn.css";
 export default function Pawn(props) {
   const [coordinates, setCoordinates] = useState(Array(2));
 
-
   useEffect(()=>{
   setCoordinates(props.coordinates)
   },[])
