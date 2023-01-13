@@ -9,6 +9,7 @@ export default function Rook() {
 export function rookMovement(currentPosition, grid) {
   const moveSet = [];
 
+  //x-axis movement
   let x1 = currentPosition[1] - 1;
   let x2 = currentPosition[1] + 1;
 
@@ -17,7 +18,6 @@ export function rookMovement(currentPosition, grid) {
       moveSet.push([currentPosition[0], x1]);
 
       if (grid[currentPosition[0]][x1] < 0) {
-        console.log("enemy found at ", [currentPosition[0], x1]);
         x1 = -1;
       }
     } else {
@@ -37,36 +37,38 @@ export function rookMovement(currentPosition, grid) {
     x2++;
   }
 
+
+  //y-axis movement
   let y1 = currentPosition[0] - 1;
   let y2 = currentPosition[0] + 1;
 
-  console.log(currentPosition)
+  let y1WallHit = false;
+  let y2WallHit = false;
 
-  while (y1 > -1 || y2 < 8) {
-    if (grid[y1][currentPosition[1]] <= 0 && y1 >= 0) {
-      moveSet.push([y1,currentPosition[1]]);
-
-      if (grid[y1][currentPosition[1]] < 0) {
-        y1 = -1;
-      }
-    }else {
-      y1 = -1;
+  while (!y1WallHit || !y2WallHit) {
+    if (y1 < 0 || grid[y1][currentPosition[1]] > 0) {
+      y1WallHit = true;
+    }
+    if (y2 > 7 || grid[y2][currentPosition[1]] > 0) {
+      y2WallHit = true;
     }
 
-    // if (grid[y2][currentPosition[1]]<=0 && y2<=8) {
-    //   moveSet.push([y2,currentPosition[1]]);
+    if (!y1WallHit && grid[y1][currentPosition[1]] <= 0) {
+      moveSet.push([y1, currentPosition[1]]);
+      if (grid[y1][currentPosition[1]] < 0) {
+        y1WallHit = true;
+      }
+    }
+    if (!y2WallHit && grid[y2][currentPosition[1]] <= 0) {
+      moveSet.push([y2, currentPosition[1]]);
+      if (grid[y2][currentPosition[1]] < 0) {
+        y2WallHit = true;
+      }
+    }
 
-    //   if (grid[y2][currentPosition[1]] < 0) {
-    //     y2 = 8;
-    //   }
-    // } else {
-    //   y2 = 8;
-    // }
     y1--;
     y2++;
   }
-
-
 
   return moveSet;
 }

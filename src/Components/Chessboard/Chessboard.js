@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Pawn, {pawnMovement} from "../Pawn/Pawn";
 import Rook, {rookMovement} from "../Rook/Rook";
+import Bishop, {bishopMovement} from "../Bishop/Bishop"
+import Knight, {knightMovement} from "../Knight/Knight";
 import "./Chessboard.css";
 
 export default function Chessboard() {
@@ -25,8 +27,11 @@ export default function Chessboard() {
         return pawnMovement(currentPosition, grid)
       case 2:
         return rookMovement(currentPosition, grid)
-
-
+      case 3: 
+        return knightMovement(currentPosition, grid)
+      case 4:
+        return bishopMovement(currentPosition, grid)
+        
     }
 
   }
@@ -104,18 +109,26 @@ export default function Chessboard() {
 
   const pieceMap = new Map();
   pieceMap.set(0, null);
+
   pieceMap.set(1, <Pawn className="player1"/>);
   pieceMap.set(-1, <Pawn className="player2"/>)
-  pieceMap.set(2, <Rook/>)
 
+  pieceMap.set(2, <Rook/>)
+  pieceMap.set(-2, <Rook/>)
+
+  pieceMap.set(3, <Knight/>)
+  
+  pieceMap.set(4, <Bishop/>)
+
+  
   useEffect(() => {
     const newGrid = grid.map((row) => [...row]);
-    // newGrid[6][0] = 1;
-    // newGrid[6][1] = 1;
-    // newGrid[5][1] =1;
-    // newGrid[5][2] =-1;
     newGrid[7][0] = 2;
-    newGrid[7][4] = -1;
+    newGrid[7][7] = 2;
+
+    newGrid[7][1] = 3
+    newGrid[7][2] = 4;
+    
 
     for(var i = 0; i<newGrid[6].length; i++){
       newGrid[6][i] = 1;
