@@ -3,7 +3,7 @@ import './Bishop.css'
 
 export default function Bishop(){
 
-    return(<div id="bishopPiece"></div>)
+    return(<div id="bishopPiece">Bishop</div>)
 }
 
 
@@ -47,6 +47,7 @@ export function bishopMovement(currentPosition, grid){
     let rb = [currentPosition[0]+1, currentPosition[1]+1]
     let rbWallHit = false
 
+    //function that runs until both lf and rb hit a wall (i.e another piece)
     while(!lfWallHit || !rbWallHit){
         if(!pointInGrid(grid, lf) || grid[lf[0]][lf[1]]>0){
             lfWallHit = true
@@ -74,6 +75,8 @@ export function bishopMovement(currentPosition, grid){
     return moveSet;
 }
 
+
+//function that checks whether a given point actually exists in the grid
 export function pointInGrid(grid, point){
     const positions =[]
     for(let i = 0; i< grid[0].length; i++){
@@ -81,7 +84,6 @@ export function pointInGrid(grid, point){
             positions.push([i,j])
         }
     }
-
     let gridPositions = JSON.stringify(positions)
     let pointPosition = JSON.stringify(point)
     let index = gridPositions.indexOf(pointPosition)
@@ -89,6 +91,5 @@ export function pointInGrid(grid, point){
     if(index!=-1){
         return true
     }
-
     return false
 }

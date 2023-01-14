@@ -3,7 +3,7 @@ import "./Rook.css";
 import pieceIsEnemy from "../Functions/isPieceEnemy";
 
 export default function Rook() {
-  return <div id="rookPiece"></div>;
+  return <div id="rookPiece">Rook</div>;
 }
 
 export function rookMovement(currentPosition, grid) {

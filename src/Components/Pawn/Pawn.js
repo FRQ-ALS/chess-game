@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./Pawn.css";
 import pieceIsEnemy from "../Functions/isPieceEnemy";
+import pawnImage from "../../Pieces/pawn.png"
 
 export default function Pawn(props) {
   return (
     <div
       id="pawn"
-      className={props.className}
+      // className={props.className}
       onMouseDown={props.onMouseDown}
       onMouseUp={props.onMouseUp}
       onMouseMove={props.onMouseMove}
-    ></div>
+    >
+      <img id="image" 
+      className={props.className}
+       src={pawnImage}></img>
+    </div>
   );
 }
 

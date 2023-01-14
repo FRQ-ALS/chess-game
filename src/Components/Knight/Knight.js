@@ -5,7 +5,7 @@ import { pointInGrid } from "../Bishop/Bishop";
 
 export default function Knight(){
 
-    return(<div id="knightPiece"></div>)
+    return(<div id="knightPiece">Knight</div>)
 }
 
 export function knightMovement(currentPosition, grid){

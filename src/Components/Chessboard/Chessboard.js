@@ -3,6 +3,8 @@ import Pawn, {pawnMovement} from "../Pawn/Pawn";
 import Rook, {rookMovement} from "../Rook/Rook";
 import Bishop, {bishopMovement} from "../Bishop/Bishop"
 import Knight, {knightMovement} from "../Knight/Knight";
+import Queen, {queenMovement} from "../Queen/Queen";
+import King, { kingMovement } from "../King/King";
 import "./Chessboard.css";
 
 export default function Chessboard() {
@@ -31,9 +33,11 @@ export default function Chessboard() {
         return knightMovement(currentPosition, grid)
       case 4:
         return bishopMovement(currentPosition, grid)
-        
+      case 5:
+        return queenMovement(currentPosition, grid)
+      case 6:
+        return kingMovement(currentPosition, grid)
     }
-
   }
   
   //function that determines whether piece is enemy piece
@@ -46,9 +50,6 @@ export default function Chessboard() {
 
   //function that handles which piece is clicked on and whether it has any valid moves
   const handleMouseClick = (e, position) =>{
-
-    console.log("Lost pieces =" + lostPieces)
-
     if(!mouseDown && grid[position[0]][position[1]]>0){
       var pieceId = grid[position[0]][position[1]]
       var moves = possibleMoves(pieceId, position)
@@ -117,8 +118,12 @@ export default function Chessboard() {
   pieceMap.set(-2, <Rook/>)
 
   pieceMap.set(3, <Knight/>)
-  
+
   pieceMap.set(4, <Bishop/>)
+
+  pieceMap.set(5, <Queen/>)
+
+  pieceMap.set(6, <King/>)
 
   
   useEffect(() => {
@@ -126,8 +131,14 @@ export default function Chessboard() {
     newGrid[7][0] = 2;
     newGrid[7][7] = 2;
 
-    newGrid[7][1] = 3
+    newGrid[7][1] = 3;
+    newGrid[7][6] = 3;
+
     newGrid[7][2] = 4;
+    newGrid[7][5] = 4;
+
+    newGrid[7][3] = 5;
+    newGrid[7][4] = 6;
     
 
     for(var i = 0; i<newGrid[6].length; i++){
@@ -187,12 +198,15 @@ function highlightMoves(position) {
                   onMouseMove={(event) => handleMouseMove(event, [i, j])}
                   onClick={event => handleMouseClick(event, mousePosition)}
                   highlighted={highlightCell([i, j])}
-                  possibleMove={highlightMoves([i,j])}
+                  // possibleMove={highlightMoves([i,j])}
+                  // possiblekill={highlightMoves([i, j])=="true" && grid[i][j]<0 ? "true" : null}
                   id="gridCell"
                   key={j}
                   className={blackOrNot(i, j)}
                 >
                   {pieceMap.get(grid[i][j])}
+                  {highlightMoves([i, j])=="true" && grid[i][j]==0 ? <div id="highlightedEmpty"></div> : null}
+                  {highlightMoves([i, j])=="true" && grid[i][j]<0 ? <div id="highlightedEnemy"></div> : null}
                 </td>
               ))}
             </tr>
