@@ -1,11 +1,15 @@
 import React from "react";
 import './Knight.css'
+import knightImage from "../../Pieces/knight.png"
 
 import { pointInGrid } from "../Bishop/Bishop";
 
-export default function Knight(){
+export default function Knight(props){
 
-    return(<div id="knightPiece">Knight</div>)
+    return(<div id="knightPiece">
+        <img id="knightimage" className={props.className} src={knightImage}>
+        </img>
+    </div>)
 }
 
 export function knightMovement(currentPosition, grid){

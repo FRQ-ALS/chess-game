@@ -11,10 +11,12 @@
 }
 
 .player2 {
-  /* background-color: blue; */
-  filter: invert(100%)
+  /* filter: invert(100%); */
+  /* filter:contrast(100%); */
+filter: hue-rotate(120deg);
+
 }
 
-#image{
-scale: 1.5;
+#pawnimage{
+scale: 1.2;
 }

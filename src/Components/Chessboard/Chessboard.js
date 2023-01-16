@@ -16,8 +16,13 @@ export default function Chessboard() {
   const [highlightedCell, setHighlightedCell] = useState([-1,-1])
   const [currentMoves, setCurrentMoves] = useState(null)
   const [lostPieces, setLostPieces] = useState([])
+  const [selectedPiece, setSelectedPiece] = useState(null)
+
+  const [cursorPosition, setCursorPosition] = useState({ top: 0, left: 0 })
   
   const handleMouseMove = (e, position) => {
+    setCursorPosition({ top: e.clientY, left: e.clientX});
+    console.log(cursorPosition)
     setMousePosition(position);
   };
 
@@ -48,8 +53,18 @@ export default function Chessboard() {
     return false
   }
 
+  const handleMouseDown = (e, position) =>{
+    setSelectedPiece(grid[position[0]][position[1]])
+    grid[position[0]][position[1]] =0;
+  }
+
+  const handleMouseUp =(e, position) =>{
+    setSelectedPiece(null)
+  }
+
   //function that handles which piece is clicked on and whether it has any valid moves
   const handleMouseClick = (e, position) =>{
+    console.log("Hello")
     if(!mouseDown && grid[position[0]][position[1]]>0){
       var pieceId = grid[position[0]][position[1]]
       var moves = possibleMoves(pieceId, position)
@@ -110,36 +125,42 @@ export default function Chessboard() {
 
   const pieceMap = new Map();
   pieceMap.set(0, null);
-
   pieceMap.set(1, <Pawn className="player1"/>);
   pieceMap.set(-1, <Pawn className="player2"/>)
-
   pieceMap.set(2, <Rook/>)
-  pieceMap.set(-2, <Rook/>)
-
+  pieceMap.set(-2, <Rook className="player2"/>)
   pieceMap.set(3, <Knight/>)
-
+  pieceMap.set(-3, <Knight className="player2"/>)
   pieceMap.set(4, <Bishop/>)
-
+  pieceMap.set(-4, <Bishop className="player2"/>)
   pieceMap.set(5, <Queen/>)
-
+  pieceMap.set(-5, <Queen className="player2" />)
   pieceMap.set(6, <King/>)
+  pieceMap.set(-6, <King className="player2" />)
 
-  
   useEffect(() => {
     const newGrid = grid.map((row) => [...row]);
+    //Rooks
     newGrid[7][0] = 2;
     newGrid[7][7] = 2;
-
+    newGrid[0][0] = -2;
+    newGrid[0][7] =-2;
+    //Knight
     newGrid[7][1] = 3;
     newGrid[7][6] = 3;
-
+    newGrid[0][1] =-3;
+    newGrid[0][6] =-3
+    //Bishop
     newGrid[7][2] = 4;
     newGrid[7][5] = 4;
-
+    newGrid[0][2] = -4;
+    newGrid[0][5] = -4;
+    //Queen
     newGrid[7][3] = 5;
+    newGrid[0][3] = -5;
+    //King
     newGrid[7][4] = 6;
-    
+    newGrid[0][4] = -6;
 
     for(var i = 0; i<newGrid[6].length; i++){
       newGrid[6][i] = 1;
@@ -189,7 +210,10 @@ function highlightMoves(position) {
 
   return (
     <div id="chessboardContainer">
-      <table>
+        {/* {selectedPiece!=null ?  <div onMouseUp={handleMouseUp} id="movingPiece" style={{top: cursorPosition.top, left: cursorPosition.left}}>
+           {pieceMap.get(selectedPiece)}
+            </div>: null } */}
+        <table>
         <tbody id="boardBody">
           {grid.map((row, i) => (
             <tr key={i}>
@@ -197,13 +221,14 @@ function highlightMoves(position) {
                 <td
                   onMouseMove={(event) => handleMouseMove(event, [i, j])}
                   onClick={event => handleMouseClick(event, mousePosition)}
+                  // onMouseDown={event => handleMouseDown(event, mousePosition)}
+                  // onMouseUp={event => handleMouseUp(event, mousePosition)}
                   highlighted={highlightCell([i, j])}
-                  // possibleMove={highlightMoves([i,j])}
-                  // possiblekill={highlightMoves([i, j])=="true" && grid[i][j]<0 ? "true" : null}
                   id="gridCell"
                   key={j}
                   className={blackOrNot(i, j)}
                 >
+                  {/* {j==0 ? <div id="cellNumber" >{i+1}</div>: null} */}
                   {pieceMap.get(grid[i][j])}
                   {highlightMoves([i, j])=="true" && grid[i][j]==0 ? <div id="highlightedEmpty"></div> : null}
                   {highlightMoves([i, j])=="true" && grid[i][j]<0 ? <div id="highlightedEnemy"></div> : null}

@@ -24,8 +24,9 @@ td {
 }
 
 #gridCell{
-  justify-content: center;
+  /* justify-content: center;
   align-items: center;
+  display: table-cell; */
 }
 
 [highlighted~=true]{
@@ -53,7 +54,7 @@ td {
 #highlightedEnemy{
   position: absolute;
   margin-top: -20px;
-  margin-left: 17px;
+  margin-left: 17.5px;
   height: 15px;
   width: 15px;
   border-radius: 50%;
@@ -61,7 +62,6 @@ td {
   border: 3px solid red;
   box-sizing: border-box;
   opacity: 0.5;
-  z-index: 10 !important;
 }
 
 #boardBody{
@@ -69,4 +69,14 @@ td {
   /* border: 2px solid black; */
   /* border-collapse:separate; */
   /* border-spacing: 4px;  */
+}
+
+
+#cellNumber{
+  color: white;
+}
+
+#movingPiece{
+  z-index: 10;
+  position:fixed;
 }

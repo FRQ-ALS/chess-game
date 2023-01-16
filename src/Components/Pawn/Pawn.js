@@ -12,7 +12,7 @@ export default function Pawn(props) {
       onMouseUp={props.onMouseUp}
       onMouseMove={props.onMouseMove}
     >
-      <img id="image" 
+      <img id="pawnimage" 
       className={props.className}
        src={pawnImage}></img>
     </div>

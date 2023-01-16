@@ -2,7 +2,15 @@
     margin: 0 auto;
     height: 30px;
     width: 30px;
+    display: flex;
+    justify-content: center;
+}
 
-    background-color: pink;
 
+.player2{
+    filter: hue-rotate(120deg);
+}
+
+#knightimage{
+    scale: 1.5;
 }

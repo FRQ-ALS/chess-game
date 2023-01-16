@@ -1,9 +1,13 @@
 import React from "react";
 import "./Rook.css";
 import pieceIsEnemy from "../Functions/isPieceEnemy";
+import rookImage from "../../Pieces/rook.png"
 
-export default function Rook() {
-  return <div id="rookPiece">Rook</div>;
+export default function Rook(props) {
+  return <div id="rookPiece">
+    <img className={props.className} id="rookimage" src={rookImage}>
+    </img>
+  </div>;
 }
 
 export function rookMovement(currentPosition, grid) {

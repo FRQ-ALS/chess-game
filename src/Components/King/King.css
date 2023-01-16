@@ -2,5 +2,13 @@
     margin: 0 auto;
     height: 30px;
     width: 30px;
-    background-color: darkorange;
+    display: flex;
+    justify-content: center;
+}
+.player2{
+    filter:hue-rotate(120deg)
+}
+
+#kingimage{
+    scale: 1.5;
 }

@@ -2,5 +2,11 @@
     margin: 0 auto;
     height: 30px;
     width: 30px;
-    background-color: purple;
+    display: flex;
+    justify-content: center;
+}
+
+
+#queenimage{
+    scale: 1.5;
 }

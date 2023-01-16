@@ -1,7 +1,15 @@
 #rookPiece {
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
   height: 30px;
   width: 30px;
-  background-color: green;
-  border-radius: 10px;
+}
+
+#player2{
+filter: hue-rotate(120deg);
+}
+
+#rookimage{
+  scale: 1.5;
 }

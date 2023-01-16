@@ -2,5 +2,14 @@
     margin: 0 auto;
     height: 30px;
     width: 30px;
-    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.player2{
+    filter: hue-rotate(120deg);
+}
+
+#bishopimage{
+    scale: 1.5;
 }

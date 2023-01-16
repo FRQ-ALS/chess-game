@@ -2,12 +2,15 @@ import React from "react";
 import { pointInGrid } from "../Bishop/Bishop";
 import { bishopMovement } from "../Bishop/Bishop";
 import { rookMovement } from "../Rook/Rook";
+import kingImage from "../../Pieces/king.png"
 
 import './King.css'
 
 
-export default function King(){
-    return(<div id="kingPiece">King</div>)
+export default function King(props){
+    return(<div id="kingPiece">
+        <img id="kingimage" src={kingImage} className={props.className} ></img>
+    </div>)
 }
 
 

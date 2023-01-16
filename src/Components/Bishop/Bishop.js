@@ -1,9 +1,13 @@
 import React from "react";
 import './Bishop.css'
+import bishopImage from "../../Pieces/bishop.png"
 
-export default function Bishop(){
+export default function Bishop(props){
 
-    return(<div id="bishopPiece">Bishop</div>)
+    return(<div id="bishopPiece">
+        <img className={props.className} id="bishopimage" src={bishopImage}>
+        </img>
+    </div>)
 }
 
 
